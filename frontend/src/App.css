@@ -1,0 +1,84 @@
+body {
+  background-color: #0a0f1a; /* Deep Navy */
+  color: white;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#0a0f1a] text-slate-200 overflow-hidden;
+  }
+}
+
+/* Glassmorphism Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Terminal Scanline Animation */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(250%);
+  }
+}
+
+.animate-scanline {
+  animation: scanline 4s linear infinite;
+}
+
+/* Neon Pulse for the Start Button */
+.neon-pulse {
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+  transition: all 0.3s ease;
+}
+
+.neon-pulse:hover {
+  box-shadow: 0 0 25px rgba(37, 99, 235, 0.7);
+}
+
+/* Hide scrollbars for a clean UI */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+/* Custom Pulsing Marker Animation */
+.beast-marker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marker-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+  z-index: 2;
+}
+
+.marker-pulse {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: marker-pulse-animation 2s infinite;
+  z-index: 1;
+}
+
+@keyframes marker-pulse-animation {
+  0% { transform: scale(0.5); opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}

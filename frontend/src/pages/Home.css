@@ -1,0 +1,53 @@
+/* Home page styles */
+/* ===== NATPAC Travel App – Home Page ===== */
+
+.home-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.home-title {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 10px;
+}
+
+.home-subtitle {
+  text-align: center;
+  font-size: 16px;
+  color: #6b7280;
+  margin-bottom: 30px;
+}
+
+.upload-card {
+  border: 2px dashed #2563eb;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  background: #f8fafc;
+}
+
+.upload-card input[type="file"] {
+  margin-top: 15px;
+}
+
+.upload-button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.upload-button:hover {
+  background: #1e40af;
+}
