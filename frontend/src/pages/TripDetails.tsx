@@ -1,5 +1,5 @@
 import React from "react";
-
+import axios from "axios";
 const Page = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
