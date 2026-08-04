@@ -1,29 +1,39 @@
 import React, { useState } from "react";
-import axios from "axios"; // 1. Import Axios
+import axios from "axios";
 
 const DataEntry = () => {
-  // 2. Update state to match your MongoDB Schema
+  // Updated state to match your PostgreSQL 'trips' table columns
   const [formData, setFormData] = useState({
-    driverName: "",
-    vehicleNumber: "",
-    startKM: "",
-    endKM: "",
-    purpose: ""
+    userId: "user1",
+    origin: "",
+    destination: "",
+    purpose: "",
+    startTime: "",
+    tripNumber: 1,
   });
 
-  // 3. Create the Submit function
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // Sends data to your running backend on port 5000
-      await axios.post("http://localhost:5000/api/trips", formData);
-      alert("✅ Trip Data Saved to NATPAC Cloud!");
-      
-      // Optional: Clear form after success
-      setFormData({ driverName: "", vehicleNumber: "", startKM: "", endKM: "", purpose: "" });
+      // 1. Updated Port to 8082 (Spring Boot Backend)
+      await axios.post("http://localhost:8082/api/trips", formData);
+
+      alert("✅ Trip Data Saved to PostgreSQL Database!");
+
+      // Clear form on success
+      setFormData({
+        userId: "user1",
+        origin: "",
+        destination: "",
+        purpose: "",
+        startTime: "",
+        tripNumber: 1,
+      });
     } catch (error) {
       console.error("Error saving trip:", error);
-      alert("❌ Failed to save. Ensure backend is running (node server.js)");
+      alert(
+        "❌ Failed to save. Check VS Code terminal to ensure Spring Boot (port 8082) is running.",
+      );
     }
   };
 
@@ -31,57 +41,71 @@ const DataEntry = () => {
     <div className="p-8 max-w-2xl mx-auto mt-10">
       <h1 className="text-3xl font-bold text-blue-500 mb-6">Trip Entry</h1>
 
-      <form onSubmit={handleSubmit} className="bg-white/5 p-6 rounded-xl border border-white/10 space-y-4">
-        {/* Driver Name */}
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white/5 p-6 rounded-xl border border-white/10 space-y-4"
+      >
+        {/* Origin */}
         <div>
-          <label className="block text-gray-300 mb-2">Driver Name</label>
+          <label className="block text-gray-300 mb-2">Origin</label>
           <input
             type="text"
             className="w-full p-3 rounded bg-black/30 text-white border border-gray-600"
-            value={formData.driverName}
-            onChange={(e) => setFormData({ ...formData, driverName: e.target.value })}
+            value={formData.origin}
+            onChange={(e) =>
+              setFormData({ ...formData, origin: e.target.value })
+            }
             required
           />
         </div>
 
-        {/* Vehicle Number */}
+        {/* Destination */}
         <div>
-          <label className="block text-gray-300 mb-2">Vehicle Number</label>
+          <label className="block text-gray-300 mb-2">Destination</label>
           <input
             type="text"
             className="w-full p-3 rounded bg-black/30 text-white border border-gray-600"
-            value={formData.vehicleNumber}
-            onChange={(e) => setFormData({ ...formData, vehicleNumber: e.target.value })}
+            value={formData.destination}
+            onChange={(e) =>
+              setFormData({ ...formData, destination: e.target.value })
+            }
             required
           />
         </div>
 
-        {/* KM Readings */}
-        <div className="flex gap-4">
-          <div className="flex-1">
-            <label className="block text-gray-300 mb-2">Start KM</label>
-            <input
-              type="number"
-              className="w-full p-3 rounded bg-black/30 text-white border border-gray-600"
-              value={formData.startKM}
-              onChange={(e) => setFormData({ ...formData, startKM: e.target.value })}
-              required
-            />
-          </div>
-          <div className="flex-1">
-            <label className="block text-gray-300 mb-2">End KM</label>
-            <input
-              type="number"
-              className="w-full p-3 rounded bg-black/30 text-white border border-gray-600"
-              value={formData.endKM}
-              onChange={(e) => setFormData({ ...formData, endKM: e.target.value })}
-              required
-            />
-          </div>
+        {/* Purpose */}
+        <div>
+          <label className="block text-gray-300 mb-2">Purpose</label>
+          <input
+            type="text"
+            className="w-full p-3 rounded bg-black/30 text-white border border-gray-600"
+            value={formData.purpose}
+            onChange={(e) =>
+              setFormData({ ...formData, purpose: e.target.value })
+            }
+            required
+          />
         </div>
 
-        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded mt-4 transition-colors">
-          Submit Trip
+        {/* Start Time */}
+        <div>
+          <label className="block text-gray-300 mb-2">Start Time</label>
+          <input
+            type="datetime-local"
+            className="w-full p-3 rounded bg-black/30 text-white border border-gray-600"
+            value={formData.startTime}
+            onChange={(e) =>
+              setFormData({ ...formData, startTime: e.target.value })
+            }
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded mt-4 transition-colors"
+        >
+          SYNC WITH NATPAC ECOSYSTEM
         </button>
       </form>
     </div>
